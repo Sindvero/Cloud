@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Id": "Policy1574913542929",
+  "Statement": [
+      {
+          "Sid": "Stmt1574913540897",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": "s3:*",
+          "Resource": [
+              "arn:aws:s3:::pre-proc-bucket-midterm-ab",
+              "arn:aws:s3:::pre-proc-bucket-midterm-ab/*"
+          ]
+      }
+  ]
+}

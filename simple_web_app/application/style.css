@@ -1,0 +1,24 @@
+.header{
+    padding: 50px;
+    background: rgba(4, 88, 214, 0.829);
+    text-align: center;
+    color: white;
+    background-image: url("src/IIT.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 92% 3%;
+    background-size : 25% 15%;
+}
+
+input[type=button], input[type=submit] {
+    margin-left: 315px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+button[type=button] {
+    margin-left: 130px;
+    margin-top: 20px;
+    padding: 5px;
+    cursor: pointer;
+}

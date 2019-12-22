@@ -1,0 +1,33 @@
+{
+    "Id": "Policy1572901414345",
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "Stmt1572901374588",
+        "Action": [
+          "s3:GetObject",
+          "s3:PutObject"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::post-proc-bucket-midterm-ab/*",
+        "Principal": {
+          "AWS": [
+            "5480-0215-1864"
+          ]
+        }
+      },
+      {
+        "Sid": "Stmt1572901408049",
+        "Action": [
+          "s3:ListBucket"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:s3:::post-proc-bucket-midterm-ab",
+        "Principal": {
+          "AWS": [
+            "5480-0215-1864"
+          ]
+        }
+      }
+    ]
+  }

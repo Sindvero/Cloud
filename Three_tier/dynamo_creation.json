@@ -1,0 +1,27 @@
+{
+    "AttributeDefinitions": [
+    {
+        "AttributeName": "UUID", 
+        "AttributeType": "S"
+    }, 
+    {
+        "AttributeName": "Email", 
+        "AttributeType": "S"
+    }
+    ], 
+        "ProvisionedThroughput": {
+            "WriteCapacityUnits": 1, 
+            "ReadCapacityUnits": 1
+        }, 
+        "TableName": "RecordsAB", 
+        "KeySchema": [
+        {
+            "KeyType": "HASH", 
+            "AttributeName": "Email"
+        },
+        {
+            "KeyType": "RANGE", 
+            "AttributeName": "UUID"
+        }
+    ]
+}

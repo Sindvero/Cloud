@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css"/>
+	<title>Index Page</title>
+
+</head>
+
+<body>
+    <div class="header">
+        <header>
+            <h1><strong>ITMO-544 Midterm Project</strong></h1> 
+
+        </header>
+    </div>
+    <div class="core">
+        <h1>Image Upload Information</h1>
+
+        <h4>Enter your information to upload your image:</h4>
+
+        <form enctype="multipart/form-data" method="post" action="submit.php"> <!-- Don't forget action=submit.php !!-->
+
+            <p><label>Your name: <br/> </label><input type="text" name="name" required/></p>
+            <p><label>Your email address: <br/> </label><input type="email" name="email" required/></p>
+            <p><label>Your phone number: <br/> </label><input type="tel" name="phone" required/></p>
+            <p><label>Select the image to upload: </label><input type="file" name="file" required/></p>
+            <input type="submit" STYLE="color:red" name="submit" title="Go see your new image ;)" value="Submit Image"/>
+
+        </form>
+
+        <button onclick="location.href='gallery.php'" type="button" title="Retrieve your previous images">Go to Gallery</button>
+
+    </div>
+</body>
