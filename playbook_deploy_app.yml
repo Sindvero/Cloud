@@ -1,0 +1,68 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+
+  tasks:
+
+        - elb_target_group:
+                name: target-gr-mt
+                protocol: http
+                port: 80
+                vpc_id: <Your VPC ID>
+                state: present
+
+        - elb_application_lb:
+                name: lb-app
+                security_groups:
+                        - sg-03d2b4484c3f7d7d2
+                subnets:
+                        - subnet-2783fb19
+                        - subnet-ffeedfa3
+                listeners:
+                        - Protocol: HTTP
+                          Port: 80
+                          DefaultActions:
+                                  - Type: forward
+                                    TargetGroupName: target-gr-mt
+        - ec2_asg:
+                name: autoscaling-gr
+                load_balancers: ['lb-app']
+                availability_zones: ['us-east-1a', 'us-east-1b']
+                min_size: 2
+                max_size: 4
+                desired_capacity: 3
+                user-data: file://install-app-env.sh
+                vpc_zone_identifier: ['subnet-2783fb19','subnet-ffeedfa3']
+
+        - s3_bucket:
+                name: pre-proc-bucket-midterm-ab
+                policy: "{{ lookup('file','policyS3Pre.json' }}"
+                state: present
+        
+        - s3_bucket:
+                name: post-proc-bucket-midterm-ab
+                policy: "{{ lookup('file','policyS3Post.json' }}"          
+                state: present
+
+        - dynamodb_table:
+                input-json: "{{ lookup('file','dynamo_creation.json' }}"
+
+        - name: SNS-abenoist-topic
+          sns_topic:
+                  name: "SNS-abenoist-topic"
+                  state: present
+                 
+        - name: process function
+          lambda:
+                name: lambda-function-mp2-ab
+                state: present
+                zip_file: '{{ process.zip }}'
+                runtime: python3.6
+                role: 'arn:aws:iam::964862435125:role/service-role/test-role-vmdz3z69'
+                handler: process.process_handler
+                vpc_subnet_ids:
+                        - subnet-2783fb19
+                        - subnet-ffeedfa3
+                timeout: 800                
+
